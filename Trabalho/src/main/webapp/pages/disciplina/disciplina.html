@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="Prova">
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="../angular.min.js"></script>
+        <script src="disciplina.js"></script>
+    </head>
+    <style>
+        .container{width: 980px; margin: 0 auto;}
+        .btn-success{background:palegreen; padding: 5px;}
+        .form {margin-bottom: 25px;}
+        table{border: 1px #ccc solid;}
+        table thead tr{background: windowframe;}
+        table thead tr th{padding: 15px;}
+        .search{padding: 8px; border: 1px #ccc solid; margin-bottom: 10px;}
+        .edit{background: orange; padding: 5px; float: left; text-decoration: none; color: #fff; margin-left: 2px; border: 2px #fff solid}
+        .remove{background: red; padding: 5px; float: right; text-decoration: none; color: #fff; margin-right: 2px; border:2px #fff solid}
+        .edit:hover{opacity: 0.8;}
+        .remove:hover{opacity: 0.8;}
+    </style>
+    <body>
+        <div ng-controller="DisciplinaController" ng-init="atualizar()" class="container">            
+            <div class="form">               
+                ID:<input type="text" ng-disabled="!isNovo" ng-model="disciplina.id"><br>              
+                Nome:<input type="text" ng-model="disciplina.nome"><br> 
+                Carga Horária:<input type="text" ng-model="disciplina.cargaHoraria"><br> 
+                Peso:<input type="text" ng-model="disciplina.peso"><br> 
+                <button ng-click="salvar(disciplina)" class="btn-success">Salvar</button>
+            </div>
+            <div ng-show="disciplinas.length > 0">
+                <input type="text" ng-model="search" placeholder="Buscar..." class="search">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Carga Horária</th>
+                            <th>Peso</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="d in disciplinas | filter:search">
+                            <td>{{d.id}}</td>
+                            <td>{{d.nome}}</td>
+                            <td>{{d.cargaHoraria}}</td>
+                            <td>{{d.peso}}</td>
+                            <td>
+                                <a href="#" ng-click="excluir(d)" class="remove">Excluir</a>
+                                <a href="#" ng-click="editar(d)"  class="edit">Editar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            
+            
+        </div>
+    </body>
+</html>
